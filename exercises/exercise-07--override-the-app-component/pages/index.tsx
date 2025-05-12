@@ -1,11 +1,12 @@
-// ✍️ create a type Props containing title as string
-
-// ✍️ obtain the title prop
-const Home = () => {
+type HomeProps = {
+  title: string
+}
+const Home = ({ title }: HomeProps) => {
   return (
     <div>
-      <h1>Overriding the App component</h1>
+      {/* <h1>Overriding the App component</h1> */}
       {/* ✍️ render the title prop */}
+      <h1>{title}</h1>
     </div>
   )
 }
