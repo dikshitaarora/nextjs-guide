@@ -2,13 +2,35 @@ import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 
 // ✍️ import the custom layout
+// import Layout from '../src/components/layout'
+import { ReactElement } from 'react'
+import { NextPage } from 'next'
 
-const App = ({ Component, pageProps }: AppProps) => {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactElement
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   // ✍️ wrap the Component with the custom layout
+
+  /** Single Shared Layout */
+  // return (
+  //   <ChakraProvider>
+  //     <Layout>
+  //       <Component {...pageProps} />
+  //     </Layout>
+  //   </ChakraProvider>
+  // )
+
+  /** Per page layout */
+
+  const getLayout = Component.getLayout ?? ((page: ReactElement) => page)
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
   )
 }
 

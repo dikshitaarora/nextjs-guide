@@ -12,15 +12,9 @@ const Footer = () => {
       borderTopStyle="solid"
     >
       <SimpleGrid columns={3} w="full">
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
-        <Link>Link</Link>
+        {Array.from({ length: 9 }).map((_, index) => (
+          <Link key={index}>Link</Link>
+        ))}
       </SimpleGrid>
     </Container>
   )
