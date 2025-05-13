@@ -1,5 +1,5 @@
 // ✍️ import GetServerSideProps from 'next'
-import type { GetStaticProps } from 'next'
+import type { GetStaticProps, GetServerSideProps } from 'next'
 import Link from 'next/link'
 import { List, ListItem, Container, Heading } from '@chakra-ui/react'
 
@@ -22,8 +22,39 @@ const Home = ({ genres }: Props) => {
   )
 }
 
+// export const getStaticProps: GetStaticProps<Props> = async (context) => {
+//   const genres = [
+//     'rock',
+//     'country',
+//     'pop',
+//     'rap',
+//     'folk',
+//     'metal',
+//     'rnb',
+//     'funk'
+//   ]
+//   return {
+//     props: {
+//       genres
+//     }
+//   }
+// }
+
 // ✍️ export the getServerSideProps method instead
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+/**
+ * Required for Server Side Rendering
+ * - This method runs on the server for every request
+ * - It can be used to fetch data that changes frequently, dynamic data
+ * - No getstaticpaths because page gets generated on every request
+ * - context
+ *  - query: The HTTP request object
+ *  - req: The HTTP request object (headers, cookies, can check them for authorisation)
+ *  - res: The HTTP response object
+ */
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context
+) => {
+  console.log('getServerSideProps')
   const genres = [
     'rock',
     'country',
@@ -40,5 +71,4 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     }
   }
 }
-
 export default Home
